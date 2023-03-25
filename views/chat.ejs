@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carga de productos</title>
+</head>
+<body>
+    <div>
+        <h1>Chat</h1>
+        <form method="POST" action="/api/chat" id="messagesForm"> 
+            <li>
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" placeholder="Ingrese su correo electrónico" required>
+            </li>
+            <li>
+                <label for="message">Mensaje:</label>
+                <input type="text" name="message" id="message" placeholder="Ingrese su mensaje" autocomplete="off" required>
+            </li>
+            <div>
+                <input type="submit">
+            </div>
+        </form>
+    </div>
+    <%- include ('./partials/messages.ejs') %>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
