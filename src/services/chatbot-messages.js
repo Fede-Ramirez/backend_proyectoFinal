@@ -3,9 +3,9 @@ const logger = require('./log4jsConfig');
 
 const initMessageDatabase = async() => {
     const initialMessage ={
-        user: '507f191e810c19729de860ea',
+        email: 'botihelpcenter@gmail.com',
         type: 'sistema',
-        message: 'Hola! Bienvenido al chatbot, ¿en qué te puedo ayudar?'
+        message: 'Hola! Bienvenido al chatbot, ¿En qué te puedo ayudar?'
     }
 
     const createdMessage = await MessageAPI.create(initialMessage);

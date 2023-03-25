@@ -25,19 +25,20 @@ const addNewMessage = (data) =>{
 
     const messageContainer = document.createElement('div');
     const messageEmail = document.createElement('p');
-    const messageTime = document.createElement('span');
+    const messageTime = document.createElement('p');
     const messageText = document.createElement('p');
 
     messageEmail.innerText = lastMessage.email;
-    messageText.innerText = lastMessage.msg;
-    messageTime.innerText = lastMessage.time;
+    messageText.innerText = lastMessage.message;
+    messageTime.innerText = lastMessage.createdAt;
 
+    //messageEmail.appendChild(messageTime);
+    messageContainer.appendChild(messageTime);
     messageContainer.appendChild(messageEmail);
-    messageEmail.appendChild(messageTime);
     messageContainer.appendChild(messageText);
 
     messageBox.appendChild(messageContainer);
-}
+};
 
 socket.on('renderMessage', (data) =>{
     addNewMessage(data);

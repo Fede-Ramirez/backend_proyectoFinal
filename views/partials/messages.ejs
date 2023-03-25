@@ -1,6 +1,7 @@
 <div id="messageContainer">
     <% messages.forEach(user => { %>
         <div>
+            <p><%= user.createdAt %></p>
             <p><%= user.email %></p>
             <p><%= user.message %></p>
         </div>

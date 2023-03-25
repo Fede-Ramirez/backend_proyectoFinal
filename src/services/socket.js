@@ -1,5 +1,5 @@
 const socketIo = require('socket.io');
-const logger = require('log4js');
+const logger = require('./log4jsConfig');
 const { MessageController } = require('../controllers');
 const { MessageAPI } = require('../api');
 
