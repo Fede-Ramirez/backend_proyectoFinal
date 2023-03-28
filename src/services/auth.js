@@ -34,7 +34,7 @@ const signup = async (req, username, password, done) => {
     try {
         logger.info('Realizando registro de nuevo usuario');
         logger.info(req.body);
-        const { firstName, lastName, age, admin, address } = req.body;
+        const { firstName, lastName, phone, age, admin, address } = req.body;
 
         if (validateNewUser(req.body)) {
             logger.error('Campos inválidos');
@@ -52,6 +52,7 @@ const signup = async (req, username, password, done) => {
                 password,
                 firstName,
                 lastName,
+                phone,
                 age,
                 admin,
                 address,

@@ -7,6 +7,7 @@ const validateNewUser = (newUser) => {
             !newUser ||
             !newUser.firstName ||
             !newUser.lastName ||
+            !newUser.phone ||
             !newUser.age ||
             !newUser.address ||
             !newUser.address.street ||

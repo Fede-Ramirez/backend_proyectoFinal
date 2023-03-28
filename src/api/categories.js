@@ -18,9 +18,7 @@ const create = async(newCategory) => {
 };
 
 const update = async (id, data) =>
-    await CategoryModel.findByIdAndUpdate(id, data, {
-        new: true,
-});
+    await CategoryModel.findByIdAndUpdate(id, data, {new: true,});
 
 const remove = async (id) => {
     const productsWithCategory = await ProductsAPI.findByCategory(id);
