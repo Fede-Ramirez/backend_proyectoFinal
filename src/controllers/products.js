@@ -1,4 +1,5 @@
 const { ProductAPI } = require('../api');
+const logger = require('../services/log4jsConfig');
 
 const getAllProducts = async (req, res, next) => {
     try {
@@ -27,6 +28,26 @@ const getProductById = async (req, res, next) => {
         next(error);
     };
 };
+
+const getProductsByCategory = async (req, res, next) => {
+    try {
+        const { categoryId } = req.params;
+        const products = await ProductAPI.find();
+        logger.info(products);
+
+        const categoryProducts = products.filter(categoryId => categoryId == categoryId);
+    
+        if (!categoryProducts) {
+            return res.status(404).json({ msg: 'Error: categoría sin productos o categoría inexistente' });
+        };
+    
+        res.json({
+            data: categoryProducts,
+        });
+    } catch (error) {
+        next(error);
+    }
+}
 
 const createProduct = async (req, res, next) => {
     try {
@@ -111,6 +132,7 @@ const deleteProduct = async (req, res, next) => {
 module.exports = {
     getAllProducts,
     getProductById,
+    getProductsByCategory,
     createProduct,
     updateProduct,
     deleteProduct,

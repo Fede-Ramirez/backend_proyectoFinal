@@ -30,7 +30,7 @@ const remove = async (id) => {
         );
     };
 
-    CategoryModel.findByIdAndDelete(id);
+    await CategoryModel.findByIdAndDelete(id);
 };
 
 module.exports = {

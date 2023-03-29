@@ -4,7 +4,7 @@ const CategoriesRouter = require('./categories');
 const ProductsRouter = require('./products');
 const CartRouter = require('./cart');
 const MessageRouter = require('./messages');
-const { isLoggedIn } = require('../controllers/users');
+const { isLoggedIn, } = require('../controllers/users');
 
 const router = Router();
 

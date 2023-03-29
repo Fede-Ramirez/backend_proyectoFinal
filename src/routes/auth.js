@@ -1,8 +1,7 @@
 const passport = require('passport');
 const { Router } = require('express');
 const logger = require('../services/log4jsConfig');
-const { EmailService } = require('../services/notifications');
-
+const { logOut } = require('../controllers/users');
 const passportOptions = { badRequestMessage: 'Usuario o contraseña inválidos' };
 
 const signUp = (req, res, next) => {
@@ -28,7 +27,7 @@ const signUp = (req, res, next) => {
     })(req, res, next);
 };
 
-const login = (req, res, next) => {
+const logIn = (req, res, next) => {
     passport.authenticate('login', passportOptions, (err, user, info) => {
         if (err) {
         return next(err);
@@ -49,13 +48,8 @@ const login = (req, res, next) => {
 
 const router = Router();
 
-router.post('/login', login);
+router.post('/login', logIn);
 router.post('/signup', signUp);
-router.post('/logout', (req, res) => {
-    () => req.logOut();
-    res.json({ 
-        msg: 'Hasta luego, gracias por visitarnos!' 
-    });
-});
+router.post('/logout', logOut);
 
 module.exports = router;

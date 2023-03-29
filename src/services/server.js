@@ -63,6 +63,15 @@ app.get('/chat',async (req, res, next) =>{
     };
 });
 
+//Middleware para rutas no implementadas
+
+app.use((req, res, next) => {
+    return res.status(404).json({
+        error: -2,
+        description: `Lo sentimos, no es posible procesar su solicitud porque la ruta ${req.url} no existe en nuestro sistema`,
+    });
+});
+
 //Middleware general
 
 app.use(function (err, req, res, next) {

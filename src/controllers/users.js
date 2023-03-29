@@ -54,12 +54,28 @@ const isLoggedIn = (req, res, done) => {
     };
 };
 
+const logOut = (req, res, next) => {
+    req.session.destroy((err) => {
+        if (!err) {
+            res.status(200).json({
+                msg: `Hasta luego!`
+            })
+        } 
+        else {
+            res.status(500).json({
+                msg: 'Error al desloguearse'
+            })
+            logger.error(err);
+        } 
+})
+};
+
 const isAdmin = (req, res, done) => {
     try {
         logger.info('Middleware para administradores');
         logger.info(req.user);
     
-        if (!req.user.admin) {
+        if (!req.user.admin || req.user.admin !== true ) {
             return res.status(401).json({ 
                 msg: 'No estás autorizado - solo administradores' 
             });
@@ -76,5 +92,6 @@ module.exports = {
     getUserByEmail,
     createUser,
     isLoggedIn,
+    logOut,
     isAdmin
 }

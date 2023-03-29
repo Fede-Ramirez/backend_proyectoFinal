@@ -41,9 +41,9 @@ const signup = async (req, username, password, done) => {
             return done(null, false, { message: 'Campos inválidos' });
         };
 
-        const user = await getUserByEmail(username);
+        const userEmail = await getUserByEmail(username);
 
-        if (user) {
+        if (userEmail) {
             logger.error('El usuario ya existe');
             return done(null, false, { message: 'El usuario ya existe' });
         } else {
