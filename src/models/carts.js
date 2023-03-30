@@ -7,9 +7,9 @@ const cartCollectionName = 'cart';
 const productItem = new mongoose.Schema(
     {
         productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: productsCollectionName,
-        required: true,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: productsCollectionName,
+            required: true,
         },
         items: { type: Number, default: 1 },
     },
@@ -19,9 +19,9 @@ const productItem = new mongoose.Schema(
 const cartSchema = new mongoose.Schema(
     {
         userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: userCollectionName,
-        required: true,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: userCollectionName,
+            required: true,
         },
         products: [productItem],
     },

@@ -31,11 +31,11 @@ const getProductById = async (req, res, next) => {
 
 const getProductsByCategory = async (req, res, next) => {
     try {
-        const { categoryId } = req.params;
+        /*const idCategory = req.params.categoryId;
         const products = await ProductAPI.find();
         logger.info(products);
 
-        const categoryProducts = products.filter(categoryId => categoryId == categoryId);
+        const categoryProducts = products.filter(categoryId => categoryId === idCategory);
     
         if (!categoryProducts) {
             return res.status(404).json({ msg: 'Error: categoría sin productos o categoría inexistente' });
@@ -43,7 +43,19 @@ const getProductsByCategory = async (req, res, next) => {
     
         res.json({
             data: categoryProducts,
-        });
+        });*/
+            const { id } = req.params;
+
+            const categoryProducts = await ProductAPI.findByCategory(id);
+            logger.info(categoryProducts);
+
+            if (!categoryProducts) {
+                return res.status(404).json({ msg: "Error: categoría sin productos o categoría inexistente" });
+            }
+
+            res.json({
+                data: categoryProducts,
+            });
     } catch (error) {
         next(error);
     }
