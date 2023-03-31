@@ -62,5 +62,129 @@ components:
           name: Ventilación y calefacción
           description: Aires acondicionado, de ventana, estufas...
       getAllCategories:
+        type: array
+        items:
+          properties:
+            _id:
+              type: string
+              example: 65g4d65g456df4g65df4g56f4
+            name:
+              type: string
+              example: Ventilación y calefacción
+            description:
+              type: string
+              example: Aires acondicionado, de ventana, estufas...
       categoryIdNotFound:
+        type: object
+        properties:
+          message:
+            type: string
+            description: ID inválido
+        example:
+          message: Lo siento, no contamos con esa categoría de productos
       deleteCategoryById:
+        type: string
+        description: Eliminación de categoría 
+    Products:
+      Product:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: ID del producto
+          name:
+            type: string
+            description: Nombre del producto
+          description:
+            type: string
+            description: Características del producto
+          price:
+            type: number
+            description: Precio del producto
+          stock:
+            type: number
+            description: Stock del producto
+          image:
+            type: string
+            description: Imagen del producto
+          categoryId:
+            type: string
+            description: ID de la categoría a la que pertenece el producto
+        example:
+          _id: nd83r4803fj284
+          name: Aire acondicionado ventana
+          description: Aire acondicionado ventana 4300 frigorías 5500 watts
+          price: 200000
+          stock: 12
+          image: https://aire-acondicionado-ventana.jpg
+          categoryId: 642259450f23c1c0d90ef39e
+      getAllProducts:
+        type: array
+        items:
+          properties:
+            _id:
+              type: string
+              example: smv845723rfjgn
+            name:
+              type: string
+              example: Aire acondicionado ventana
+            description:
+              type: string
+              example: Aire acondicionado ventana 4300 frigorías 5500 watts
+            price:
+              type: number
+              example: 200000
+            stock:
+              type: number
+              example: 12
+            image:
+              type: string
+              example: https://aire-acondicionado-ventana.jpg
+            categoryId:
+              type: string
+              example: 642259450f23c1c0d90ef39e
+      productIdNotFound:
+        type: object
+        properties:
+          message:
+            type: string
+            description: ID inválido
+        example:
+          message: El producto solicitado no existe
+      categoryProductsNotFound:
+        type: object
+        properties:
+          message:
+            type: string
+            description: ID inválido
+        example:
+          message: Error: categoría sin productos o categoría inexistente
+      deleteProductById:
+        type: string
+        description: Eliminación de producto
+    Carts:
+      Cart:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: ID del carrito
+          userId:
+            type: string
+            description: ID del usuario a la que pertenece el carrito
+          products:
+            type: array
+            description: Array de productos que compró el usuario
+        example:
+          _id: fobwf8746823414
+          userId: 64230e94fbbd0fd34d3b835f
+          products: [
+            {
+              productId: 6422603b8ec2790d348de39a,
+              items: 2
+            },
+            {
+              productId: 6424f6a82eae82612a8e8bbb,
+              items: 2
+            },
+          ]
