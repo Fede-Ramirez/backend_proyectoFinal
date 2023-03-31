@@ -1,0 +1,140 @@
+components:
+  parameters:
+    schemas:
+      BodyNewSignUp: 
+        type: object
+        required:
+          - email
+          - password
+          - firstName
+          - lastName
+          - phone
+          - age
+          - admin
+          - address
+        properties:
+          email:
+            type: string
+            description: Email del usuario.
+          password:
+            type: string
+            description: Contraseña del usuario.
+          firstName:
+            type: string
+            description: Nombre del usuario.
+          lastName:
+            type: string
+            description: Apellido del usuario.
+          phone:
+            type: number
+            description: Número de teléfono del usuario.
+          age:
+            type: number
+            description: Edad del usuario.
+          admin:
+            type: boolean
+            description: Condición de administrador verdadera o falsa
+          address: 
+            type: object
+            description: Domicilio del usuario.
+        example:
+          email: ejemplousuario@gmail.com
+          password: contraseña1234
+          firstName: Esteban
+          lastName: Lopez
+          phone: 1112345678
+          age: 20
+          admin: false
+          address: {
+            street: Calle falsa 123,
+            city: Buenos Aires
+          }
+      BodyNewLogin:
+        type: object
+        required:
+          - email
+          - password
+        properties:
+          email:
+            type: string
+            description: Email del usuario.
+          password:
+            type: string
+            description: Contraseña del usuario.
+        example:
+          email: ejemplousuario@gmail.com
+          password: contraseña1234
+      BodyNewCategory:
+        type: object
+        required:
+          - name
+          - description
+        properties:
+          name:
+            type: string
+            description: Nombre de la categoría.
+          description:
+            type: string
+            description: Tipo de productos que incluye la categoría.
+        example:
+          name: Ventilación y calefacción
+          description: Aires acondicionado, de ventana, estufas...
+      BodyNewProduct:
+        type: object
+        required:
+          - name
+          - description
+          - price
+          - stock
+          - image
+          - categoryId
+        properties:
+          name:
+            type: string
+            description: Nombre del producto.
+          description:
+            type: string
+            description: Características del producto.
+          price:
+            type: number
+            description: Precio del producto.
+          stock:
+            type: number
+            description: Stock del producto.
+          image:
+            type: string
+            description: Url de la imagen del producto.
+          categoryId:
+            type: string
+            description: ID de la categoría a la que pertenece el producto.
+        example:
+          name: Aire acondicionado ventana
+          description: Aire acondicionado ventana 4300 frigorías 5500 watts
+          price: 200000
+          stock: 12
+          image: https://aire-acondicionado-ventana.jpg
+          categoryId: 642259450f23c1c0d90ef39e
+      BodyNewCart:
+        type: object
+        required:
+          - userId
+          - products
+        properties:
+          userId:
+            type: string
+            description: ID de la base de datos del usuario.
+          products:
+            type: array
+            description: Array de productos comprados por el usuario.
+        example:
+          userId: 64230e94fbbd0fd34d3b835f
+          products: [
+            {
+              productId: 6422603b8ec2790d348de39a,
+              items: 2
+            },
+            {
+              productId: 6424f6a82eae82612a8e8bbb,
+              items: 2
+            },
+          ]

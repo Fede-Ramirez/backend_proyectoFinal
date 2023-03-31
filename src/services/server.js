@@ -9,12 +9,20 @@ const logger = require('./log4jsConfig');
 const { MessageController } = require('../controllers');
 const http = require('http');
 const path = require('path');
+const { information } = require('../docs/information');
+const swaggerUI = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc');
 
 const app = express();
 const server = new http.Server(app);
 
 app.use(express.json());
 
+//Configuración para la documentación
+
+const specs = swaggerJSDoc(information);
+
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));
 //Configuración de las sesiones
 
 const ttlSeconds = 1800;

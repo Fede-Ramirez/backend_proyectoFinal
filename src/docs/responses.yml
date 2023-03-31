@@ -1,0 +1,66 @@
+components:
+  schema:
+    Users:
+      User:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: ID del usuario
+          email:
+            type: string
+            description: Email del usuario
+          password:
+            type: string
+            description: Contraseña del usuario
+          firstName:
+            type: string
+            description: Nombre del usuario
+          lastName:
+            type: string
+            description: Apellido del usuario
+          phone:
+            type: number
+            description: Número de teléfono del usuario
+          age:
+            type: number
+            description: Edad del usuario
+          admin:
+            type: boolean
+            description: Condición de administrador verdadera o falsa
+          address:
+            type: object
+            description: Domicilio del usuario
+        example:
+          _id: emh475654283ej5g743yr
+          email: ejemplousuario@gmail.com
+          password: comwjr75212i4856
+          firstName: Esteban
+          lastName: Lopez
+          phone: 1112345678
+          age: 20
+          admin: false
+          address: {
+            street: Calle falsa 123,
+            city: Buenos Aires
+          }
+    Categories:
+      Category:
+        type: object
+        properties:
+          _id:
+            type: string
+            description: ID de la categoría
+          name:
+            type: string
+            description: Nombre de la categoría
+          description:
+            type: string
+            description: Tipo de productos dentro de la categoría
+        example:
+          _id: adio3jr457122485
+          name: Ventilación y calefacción
+          description: Aires acondicionado, de ventana, estufas...
+      getAllCategories:
+      categoryIdNotFound:
+      deleteCategoryById:
