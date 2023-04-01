@@ -58,7 +58,7 @@ const logOut = (req, res, next) => {
     req.session.destroy((err) => {
         if (!err) {
             res.status(200).json({
-                msg: `Hasta luego!`
+                msg: `Hasta luego, gracias por visitarnos!`
             })
         } 
         else {

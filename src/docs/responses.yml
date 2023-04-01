@@ -44,6 +44,46 @@ components:
             street: Calle falsa 123,
             city: Buenos Aires
           }
+      invalidSignup: 
+        type: object
+        properties:
+          message:
+            type: string
+            description: Campos inválidos
+        example:
+          message: Campos inválidos
+      userAlreadyExists:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Email repetido
+        example:
+          message: El usuario ya existe
+      invalidLogin: 
+        type: object
+        properties:
+          message:
+            type: string
+            description: Usuario o contraseña inválidos
+        example:
+          message: Usuario o contraseña inválidos
+      logOut:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Cerrar sesión
+        example:
+          message: Hasta luego, gracias por visitarnos!
+      invalidLogOut:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Cerrar sesión
+        example:
+          message: Error al desloguearse
     Categories:
       Category:
         type: object
@@ -158,7 +198,7 @@ components:
             type: string
             description: ID inválido
         example:
-          message: Error: categoría sin productos o categoría inexistente
+          message: Categoría sin productos o categoría inexistente
       deleteProductById:
         type: string
         description: Eliminación de producto
@@ -188,3 +228,11 @@ components:
               items: 2
             },
           ]
+      invalidParameters:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Faltan parámetros o los datos son inválidos
+        example:
+          message: Parámetros inválidos

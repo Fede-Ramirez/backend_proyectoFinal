@@ -1,0 +1,113 @@
+paths:
+  /api/auth/signup:
+    post:
+      tags:
+        - Users
+      summary: Registro de nuevo usuario.
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schemas/BodyNewSignUp'
+        required: true
+      responses:
+        200: 
+          description: Se registró al usuario correctamente
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Users/User'
+        401:
+          description: Campos inválidos
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Users/invalidSignup'
+        400:
+          description: Intento de registrar dos usuarios con el mismo mail
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Users/userAlreadyExists'
+  /api/auth/login:
+    post:
+      tags:
+        - Users
+      summary: Inicio de sesión de usuario.
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schemas/BodyNewLogin'
+        required: true
+      responses:
+        200: 
+          description: Se inició sesión correctamente
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Users/User'
+        401:
+          description: Campos inválidos
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Users/invalidLogin'
+  /api/categories:
+    get:
+      tags:
+      - Categories
+      summary: Lista de categorías en base de datos
+      responses:
+        200:
+          description: Lista de categorías
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Categories/getAllCategories'
+    post:
+      post:
+      tags:
+        - Categories
+      summary: Agregar una nueva categoría.
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schemas/BodyNewCategory'
+        required: true
+      responses:
+        200: 
+          description: Se agregó la categoría correctamente
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Categories/Category'
+  /api/categories/{id}:
+    get:
+      tags:
+      - Categories
+      summary: Devolver una categoría por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID de la categoría solicitada
+          schema:
+            type: string
+      responses:
+        200:
+          description: Categoría encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Categories/Category'
+        404:
+          description: ID de categoría inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Categories/categoryIdNotFound'  
+
+
+
