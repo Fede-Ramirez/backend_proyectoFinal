@@ -44,7 +44,7 @@ components:
           lastName: Lopez
           phone: 1112345679
           age: 20
-          admin: false
+          admin: true
           address: {
             street: Calle falsa 123,
             city: Buenos Aires
@@ -64,6 +64,10 @@ components:
         example:
           email: ejemplousuario@gmail.com
           password: contraseña1234
+      BodyLogOut:
+        type: object
+        example: 
+          botónCerrarSesión: click
       BodyNewCategory:
         type: object
         required:
@@ -113,7 +117,7 @@ components:
           price: 200000
           stock: 12
           image: https://aire-acondicionado-ventana.jpg
-          categoryId: 642259450f23c1c0d90ef39e
+          categoryId: 6428f0f3f6dc68a0d9a77b4c
       BodyNewCart:
         type: object
         required:
@@ -138,3 +142,22 @@ components:
               items: 2
             },
           ]
+      BodyNewCartProduct:
+        type: object
+        required:
+          - productId
+          - amount
+        properties:
+          productId:
+            type: string
+            description: ID del producto a comprar.
+          amount:
+            type: number
+            description: Cantidad de un mismo item comprado.
+        example:
+          productId: 642911e42656c1ea706c852d
+          amount: 2
+      BodyNewOrder: 
+        type: object
+        example: 
+          botónRealizarCompra: click

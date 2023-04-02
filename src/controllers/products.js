@@ -49,7 +49,7 @@ const getProductsByCategory = async (req, res, next) => {
             const categoryProducts = await ProductAPI.findByCategory(id);
             logger.info(categoryProducts);
 
-            if (!categoryProducts) {
+            if (categoryProducts.length === 0) {
                 return res.status(404).json({ msg: "Error: categoría sin productos o categoría inexistente" });
             }
 
@@ -63,9 +63,9 @@ const getProductsByCategory = async (req, res, next) => {
 
 const createProduct = async (req, res, next) => {
     try {
-        const { name, description, stock, price, categoryId } = req.body;
+        const { name, description, stock, price, image, categoryId } = req.body;
     
-        if (!name || !description || !stock || !price || !categoryId) {
+        if (!name || !description || !stock || !price || !image || !categoryId) {
             return res.status(400).json({ 
                 msg: 'Error: parámetros inválidos' 
             });
@@ -76,6 +76,7 @@ const createProduct = async (req, res, next) => {
             description,
             stock,
             price,
+            image,
             categoryId,
         };
     

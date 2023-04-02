@@ -17,7 +17,7 @@ const addProduct = async (cartId, productId, items) => {
     const product = await ProductsAPI.find(productId);
 
     if (!product) {
-        throw new ApiError('Error: el producto no existe', ErrorStatus.BadRequest);
+        throw new ApiError('Error: el producto que desea agregar no existe', ErrorStatus.BadRequest);
     };
 
     if (!product.stock || items > product.stock) {

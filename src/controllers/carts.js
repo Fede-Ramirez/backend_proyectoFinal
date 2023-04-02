@@ -41,7 +41,7 @@ const deleteProduct = async (req, res, next) => {
         const { productId, amount } = req.body;
     
         if (!productId) {
-            throw new ApiError('Error: parámetros inválidos', ErrorStatus.BadRequest);
+            throw new ApiError('Error: parámetros inválidos, ingresé un ID de producto correcto', ErrorStatus.BadRequest);
         }
     
         const cart = await CartAPI.getCartByUser(user._id);
@@ -64,7 +64,7 @@ const createOrder = async (req, res, next) => {
         await CartAPI.createOrder(cart._id);
     
         res.json({
-            msg: 'Su orden ha sido creada con éxito',
+            msg: 'Su orden ha sido creada y envíada con éxito, en breve nos pondremos en contacto',
         });
     } catch (error) {
         next(error);

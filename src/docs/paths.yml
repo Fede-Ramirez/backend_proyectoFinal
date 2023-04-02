@@ -53,6 +53,30 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schema/Users/invalidLogin'
+  /api/auth/logout:
+    post:
+      tags:
+        - Users
+      summary: Cierre de sesión de usuario.
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schemas/BodyLogOut'
+        required: true
+      responses:
+        200: 
+          description: Se cerró sesión correctamente
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Users/logOut'
+        500:
+          description: Error al desloguearse
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Users/invalidLogOut'
   /api/categories:
     get:
       tags:
@@ -66,7 +90,6 @@ paths:
               schema:
                 $ref: '#/components/schema/Categories/getAllCategories'
     post:
-      post:
       tags:
         - Categories
       summary: Agregar una nueva categoría.
@@ -83,6 +106,12 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schema/Categories/Category'
+        401:
+          description: Parámetros inválidos
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Categories/invalidCategoryParameters'
   /api/categories/{id}:
     get:
       tags:
@@ -107,7 +136,302 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Categories/categoryIdNotFound'  
+                $ref: '#/components/schema/Categories/categoryIdNotFound'
+    put:   
+      tags:
+      - Categories
+      summary: Editar categoria por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID del producto a editar
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schemas/BodyNewCategory'
+        required: true
+      responses:
+          200:
+            description: Categoría actualizada con éxito
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schema/Categories/Category'
+          400:
+            description: Faltan parámetros o son inválidos
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schema/Categories/invalidCategoryParameters'
+    delete:
+      tags:
+      - Categories
+      summary: Eliminar categoría por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID de la categoría a eliminar
+          schema:
+            type: string
+      responses:
+        200:
+          description: Categoría eliminada con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Categories/deleteCategoryById'
+        401:
+          description: Prohibición de eliminar una categoría con productos dentro
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Categories/deleteCategoryProhibition'
+        404:
+          description: No se encuentra la categoría con el ID ingresado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Categories/deleteCategoryIdNotFound'       
+  /api/products:
+    get:
+      tags:
+      - Products
+      summary: Lista de productos en base de datos
+      responses:
+        200:
+          description: Lista de productos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Products/getAllProducts'
+    post:
+      tags:
+        - Products
+      summary: Agregar un nuevo producto.
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schemas/BodyNewProduct'
+        required: true
+      responses:
+        200: 
+          description: Se agregó el producto correctamente
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Products/Product'
+        401:
+          description: Parámetros inválidos
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Products/invalidProductParameters'
+  /api/products/category/{id}:
+    get:
+      tags:
+      - Products
+      summary: Filtrar productos por ID de categoría
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID de la categoría de productos solicitado
+          schema:
+            type: string
+      responses:
+        200:
+          description: Productos filtrados con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Products/getAllProducts'
+        404:
+          description: ID de categoría de producto inválida o categoría sin productos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Products/categoryProductsNotFound'
+  /api/products/{id}:
+    get:
+      tags:
+      - Products
+      summary: Devolver un producto por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID del producto solicitado
+          schema:
+            type: string
+      responses:
+        200:
+          description: Producto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Products/Product'
+        404:
+          description: ID de producto inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Products/productIdNotFound'
+    put:   
+      tags:
+      - Products
+      summary: Editar producto
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID del producto a editar
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schemas/BodyNewProduct'
+        required: true
+      responses:
+          200:
+            description: Producto actualizado con éxito
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schema/Products/Product'
+          400:
+            description: Faltan parámetros o son inválidos
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schema/Products/invalidProductParameters'
+    delete:
+      tags:
+      - Products
+      summary: Eliminar producto por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID del producto a eliminar
+          schema:
+            type: string
+      responses:
+        200:
+          description: Categoría eliminada con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Products/deleteProductById'
+        404:
+          description: No se encuentra el producto con el ID ingresado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Products/deleteProductIdNotFound'
+  /api/cart:
+    get:
+      tags:
+      - Carts
+      summary: Carrito de compras del usuario
+      responses:
+        200:
+          description: Estado actual del carrito de compras
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Carts/Cart'
+  /api/cart/add:
+    post:
+      tags:
+        - Carts
+      summary: Agregar un nuevo producto al carrito.
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schemas/BodyNewCartProduct'
+        required: true
+      responses:
+        200: 
+          description: Se agregó el producto al carrito con éxito.
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Carts/Cart'
+        400:
+          description: Intento de agregar un producto inexistente al carrito.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Carts/invalidProductAdding'
+        401:
+          description: No hay stock o stock insuficiente
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Carts/insufficientStock'
+  /api/cart/remove:
+    post:
+      tags:
+        - Carts
+      summary: Eliminar un nuevo producto al carrito.
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schemas/BodyNewCartProduct'
+        required: true
+      responses:
+        200: 
+          description: Se eliminó el producto del carrito con éxito.
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Carts/Cart'
+        400:
+          description: Intento de eliminar un producto inexistente al carrito.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Carts/invalidProductRemoving'
+        401:
+          description: Parámetros inválidos, ausencia de ID o ID de producto incorrecto
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Carts/invalidParameters'
+  /api/cart/order:
+    post:
+      tags:
+        - Carts
+      summary: Generación de orden de compra.
+      requestBody: 
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/parameters/schemas/BodyNewOrder'
+        required: true
+      responses:
+        200: 
+          description: Generación de orden de compra con éxito
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Carts/orderCreatedWithSuccess'
+        401:
+          description: Generación de orden fallida
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Carts/orderCreatingFailed'
 
 
 

@@ -39,7 +39,7 @@ components:
           lastName: Lopez
           phone: 1112345678
           age: 20
-          admin: false
+          admin: true
           address: {
             street: Calle falsa 123,
             city: Buenos Aires
@@ -122,9 +122,38 @@ components:
             description: ID inválido
         example:
           message: Lo siento, no contamos con esa categoría de productos
+      invalidCategoryParameters:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Ausencia de campo name o descriptión; o parámetros inválidos
+        example:
+          message: Parámetros inválidos
       deleteCategoryById:
-        type: string
-        description: Eliminación de categoría 
+        type: object
+        properties:
+          message:
+            type: string
+            description: Eliminación de categoría con éxito
+        example:
+          message: Categoría eliminada con éxito
+      deleteCategoryIdNotFound:
+        type: object
+        properties:
+          message:
+            type: string
+            description: ID inválido
+        example:
+          message: No se puede eliminar una categoría que no existe
+      deleteCategoryProhibition:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Prohibición de eliminar una categoría con productos dentro
+        example:
+          message: No se puede eliminar la categoría porque hay productos dentro de la misma
     Products:
       Product:
         type: object
@@ -199,9 +228,30 @@ components:
             description: ID inválido
         example:
           message: Categoría sin productos o categoría inexistente
+      invalidProductParameters:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Ausencia de campo name, descriptión, price, stock, image o categoryId; o parámetros inválidos
+        example:
+          message: Parámetros inválidos
       deleteProductById:
-        type: string
-        description: Eliminación de producto
+        type: object
+        properties:
+          message:
+            type: string
+            description: Producto eliminado con éxito
+        example:
+          message: Producto eliminado con éxito
+      deleteProductIdNotFound:
+        type: object
+        properties:
+          message:
+            type: string
+            description: ID inválido
+        example:
+          message: El producto que desea eliminar no existe
     Carts:
       Cart:
         type: object
@@ -228,11 +278,67 @@ components:
               items: 2
             },
           ]
+      productAddedWithSuccess:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Adición de producto con éxito
+        example:
+          message: Producto agregado con éxito
+      productRemovedWithSuccess:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Eliminación de producto con éxito
+        example:
+          message: Producto eliminado con éxito
+      invalidProductAdding:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Agregar un producto inexistente al carrito
+        example:
+          message: El producto que desea agregar no existe
+      insufficientStock:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Falta de stock
+        example:
+          message: Lo lamentamos, actualmente no contamos con stock disponible para este producto
+      invalidProductRemoving:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Eliminar un producto inexistente al carrito
+        example:
+          message: El producto que desea eliminar no existe
+      orderCreatedWithSuccess:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Generación de orden creada con éxito
+        example:
+          message: Su orden ha sido creada y envíada con éxito, en breve nos pondremos en contacto
+      orderCreatingFailed:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Generación de orden fallada
+        example:
+          message: No puedes crear una orden con el carrito vacío
       invalidParameters:
         type: object
         properties:
           message:
             type: string
-            description: Faltan parámetros o los datos son inválidos
+            description: Falta el ID o debe ingresar un ID de producto válido
         example:
-          message: Parámetros inválidos
+          message: Parámetros inválidos, ingrese un ID de producto correcto

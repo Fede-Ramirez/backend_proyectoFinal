@@ -59,7 +59,7 @@ const updateCategory = async (req, res, next) => {
         const { id } = req.params;
         const { name, description } = req.body;
     
-        if (!name && !description) {
+        if (!name || !description) {
             return res.status(400).json({ msg: 'Error: parámetros inválidos' });
         }
     
