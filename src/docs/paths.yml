@@ -11,7 +11,7 @@ paths:
               $ref: '#/components/parameters/schemas/BodyNewSignUp'
         required: true
       responses:
-        200: 
+        201: 
           description: Se registró al usuario correctamente
           content:
             application/json:
@@ -29,6 +29,12 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schema/Users/userAlreadyExists'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
   /api/auth/login:
     post:
       tags:
@@ -53,6 +59,12 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schema/Users/invalidLogin'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
   /api/auth/logout:
     post:
       tags:
@@ -77,6 +89,30 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schema/Users/invalidLogOut'
+  /api/hello:
+    get:
+      tags:
+      - Sessions
+      summary: Datos de sesión del usuario
+      responses:
+        200:
+          description: Datos de sesión del usuario
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Sessions/Session'
+        401:
+          description: Prohibición de acceso a datos de sesión, falta iniciar sesión
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Sessions/unauthorized'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
   /api/categories:
     get:
       tags:
@@ -89,6 +125,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/Categories/getAllCategories'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
     post:
       tags:
         - Categories
@@ -112,6 +154,12 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schema/Categories/invalidCategoryParameters'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
   /api/categories/{id}:
     get:
       tags:
@@ -137,6 +185,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/Categories/categoryIdNotFound'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
     put:   
       tags:
       - Categories
@@ -167,6 +221,12 @@ paths:
               application/json:
                 schema:
                   $ref: '#/components/schema/Categories/invalidCategoryParameters'
+          500:
+            description: Internal Server Error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schema/Servers/internalServerError'
     delete:
       tags:
       - Categories
@@ -196,7 +256,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schema/Categories/deleteCategoryIdNotFound'       
+                $ref: '#/components/schema/Categories/deleteCategoryIdNotFound'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
   /api/products:
     get:
       tags:
@@ -209,6 +275,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/Products/getAllProducts'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
     post:
       tags:
         - Products
@@ -220,18 +292,24 @@ paths:
               $ref: '#/components/parameters/schemas/BodyNewProduct'
         required: true
       responses:
-        200: 
+        201: 
           description: Se agregó el producto correctamente
           content:
             application/json:
               schema: 
                 $ref: '#/components/schema/Products/Product'
-        401:
+        400:
           description: Parámetros inválidos
           content:
             application/json:
               schema: 
                 $ref: '#/components/schema/Products/invalidProductParameters'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
   /api/products/category/{id}:
     get:
       tags:
@@ -257,6 +335,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/Products/categoryProductsNotFound'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
   /api/products/{id}:
     get:
       tags:
@@ -282,6 +366,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/Products/productIdNotFound'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
     put:   
       tags:
       - Products
@@ -312,6 +402,12 @@ paths:
               application/json:
                 schema:
                   $ref: '#/components/schema/Products/invalidProductParameters'
+          500:
+            description: Internal Server Error
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schema/Servers/internalServerError'
     delete:
       tags:
       - Products
@@ -336,6 +432,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/Products/deleteProductIdNotFound'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
   /api/cart:
     get:
       tags:
@@ -348,6 +450,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/Carts/Cart'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
   /api/cart/add:
     post:
       tags:
@@ -378,6 +486,12 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schema/Carts/insufficientStock'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
   /api/cart/remove:
     post:
       tags:
@@ -397,7 +511,7 @@ paths:
               schema: 
                 $ref: '#/components/schema/Carts/Cart'
         400:
-          description: Intento de eliminar un producto inexistente al carrito.
+          description: Intento de eliminar un producto inexistente del carrito.
           content:
             application/json:
               schema:
@@ -408,6 +522,12 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schema/Carts/invalidParameters'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
   /api/cart/order:
     post:
       tags:
@@ -432,6 +552,12 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schema/Carts/orderCreatingFailed'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/Servers/internalServerError'
 
 
 

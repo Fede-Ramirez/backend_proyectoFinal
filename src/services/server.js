@@ -63,9 +63,8 @@ app.set('views', viewsPath );
 
 app.get('/chat',async (req, res, next) =>{
     try{
-        //const products = await getAllProducts();
         const messages = await MessageController.getMessages();
-        res.render(/*'formulario'*/ 'chat', {/*products,*/ messages});
+        res.render('chat', {messages});
     }catch (err){
         next(err);
     };

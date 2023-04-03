@@ -342,3 +342,40 @@ components:
             description: Falta el ID o debe ingresar un ID de producto válido
         example:
           message: Parámetros inválidos, ingrese un ID de producto correcto
+    Sessions:
+      Session:
+        type: object
+        properties:
+          cookie:
+            type: object
+            description: Datos de la cookie
+          passport:
+            type: object
+            description: ID del usuario que inició sesión
+        example:
+          cookie: {
+            originalMaxAge: 1800000,
+            expires: "2023-04-03T02:37:06.721Z",
+            httpOnly: true,
+            path: "/"
+          }
+          passport: {
+              user: "6428d2b15c827e49a6a02684"
+          }
+      unauthorized:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Falta autenticación/iniciar sesión
+        example:
+          message: No estás autorizado/a, debes iniciar sesión
+    Servers:
+      internalServerError: 
+        type: object
+        properties:
+          message:
+            type: string
+            description: Error del servidor
+        example:
+          message: Internal Server Error

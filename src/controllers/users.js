@@ -45,7 +45,7 @@ const isLoggedIn = (req, res, done) => {
         logger.info(req.user);
     
         if (!req.isAuthenticated()) {
-            return res.status(401).json({ msg: 'No estás autorizado/a' });
+            return res.status(401).json({ msg: 'No estás autorizado/a, debes iniciar sesión' });
         };
     
         done();
