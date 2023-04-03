@@ -84,6 +84,14 @@ components:
             description: Cerrar sesión
         example:
           message: Error al desloguearse
+      adminOnly:
+        type: object
+        properties:
+          message:
+            type: string
+            description: Solo administradores tienen permiso de realizar esta solicitud
+        example:
+          message: No estás autorizado - solo administradores
     Categories:
       Category:
         type: object

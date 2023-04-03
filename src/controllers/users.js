@@ -1,6 +1,9 @@
 const logger = require('../services/log4jsConfig');
 const { UserAPI, CartAPI } = require('../api');
 
+//Controladores vinculados a todo lo asociado a la autenticación (se utilizan la UserAPI y la CartAPI)
+
+//Validación de todos los campos que debe contener un nuevo usuario a registrar
 const validateNewUser = (newUser) => {
     try {
         return (
@@ -18,6 +21,7 @@ const validateNewUser = (newUser) => {
     };
 };
 
+//Traer a un usuario según su mail
 const getUserByEmail = async(email) => {
     try {
         const user = await UserAPI.findByEmail(email);
@@ -27,6 +31,7 @@ const getUserByEmail = async(email) => {
     };
 };
 
+//Crear un nuevo un usuario y su carrito correspondiente al mismo tiempo
 const createUser = async (userData) => {
     try {
         const newUser = await UserAPI.create(userData);
@@ -37,6 +42,7 @@ const createUser = async (userData) => {
     };
 };
 
+//Verificación de sesión iniciada
 const isLoggedIn = (req, res, done) => {
     try {
         logger.info('Está autenticado');
@@ -54,6 +60,7 @@ const isLoggedIn = (req, res, done) => {
     };
 };
 
+//Cerrar sesión
 const logOut = (req, res, next) => {
     req.session.destroy((err) => {
         if (!err) {

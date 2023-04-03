@@ -1,5 +1,8 @@
 const { CategoryAPI } = require('../api');
 
+//Controladores para las rutas vinculadas a las categorías, (se utiliza la CategoryAPI)
+
+//Traer todas las categorías
 const getAllCategories = async (req, res, next) => {
     try {
         const categories = await CategoryAPI.find();
@@ -9,6 +12,7 @@ const getAllCategories = async (req, res, next) => {
     };
 };
 
+//Traer categoría por ID tomado como parámetro
 const getCategoryById = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -28,6 +32,7 @@ const getCategoryById = async (req, res, next) => {
     };
 };
 
+//Crear una categoría tomando como datos el nombre y la descripción
 const createCategory = async (req, res, next) => {
     try {
         const { name, description } = req.body;
@@ -54,6 +59,7 @@ const createCategory = async (req, res, next) => {
     };
 };
 
+//Editar una categoría tomando como datos el nombre y la descripción
 const updateCategory = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -79,6 +85,7 @@ const updateCategory = async (req, res, next) => {
     };
 };
 
+//Eliminar una categoría tomando como parámetro el ID de la misma
 const deleteCategory = async (req, res, next) => {
     try {
         const { id } = req.params;

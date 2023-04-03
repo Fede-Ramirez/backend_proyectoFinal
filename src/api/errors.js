@@ -1,3 +1,5 @@
+//API para manejo de errores para todo el proyecto
+
 const ErrorStatus = {
     BadRequest: 400,
     NotFound: 404,

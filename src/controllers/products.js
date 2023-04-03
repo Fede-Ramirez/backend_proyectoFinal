@@ -1,6 +1,9 @@
 const { ProductAPI } = require('../api');
 const logger = require('../services/log4jsConfig');
 
+//Controladores asociados a las rutas vinculadas a productos (se utiliza la Product API)
+
+//Traer todos los productos
 const getAllProducts = async (req, res, next) => {
     try {
         const products = await ProductAPI.find();
@@ -12,6 +15,7 @@ const getAllProducts = async (req, res, next) => {
     };
 };
 
+//Traer un producto según su ID
 const getProductById = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -29,38 +33,26 @@ const getProductById = async (req, res, next) => {
     };
 };
 
+//Traer productos filtrados por categoría
 const getProductsByCategory = async (req, res, next) => {
     try {
-        /*const idCategory = req.params.categoryId;
-        const products = await ProductAPI.find();
-        logger.info(products);
+        const { id } = req.params;
+        const categoryProducts = await ProductAPI.findByCategory(id);
+        logger.info(categoryProducts);
 
-        const categoryProducts = products.filter(categoryId => categoryId === idCategory);
-    
-        if (!categoryProducts) {
-            return res.status(404).json({ msg: 'Error: categoría sin productos o categoría inexistente' });
-        };
-    
+        if (categoryProducts.length === 0) {
+            return res.status(404).json({ msg: "Error: categoría sin productos o categoría inexistente" });
+        }
+
         res.json({
             data: categoryProducts,
-        });*/
-            const { id } = req.params;
-
-            const categoryProducts = await ProductAPI.findByCategory(id);
-            logger.info(categoryProducts);
-
-            if (categoryProducts.length === 0) {
-                return res.status(404).json({ msg: "Error: categoría sin productos o categoría inexistente" });
-            }
-
-            res.json({
-                data: categoryProducts,
-            });
+        });
     } catch (error) {
         next(error);
     }
 }
 
+//Crear un nuevo producto tomando los datos de los campos del nombre, descripción, stock, precio, imagen y ID de categoría
 const createProduct = async (req, res, next) => {
     try {
         const { name, description, stock, price, image, categoryId } = req.body;
@@ -91,6 +83,7 @@ const createProduct = async (req, res, next) => {
     };
 };
 
+//Editar un producto tomando los nuevos datos del nombre, descripción, stock, precio e ID de categoría
 const updateProduct = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -121,6 +114,7 @@ const updateProduct = async (req, res, next) => {
     };
 };
 
+//Eliminar un producto tomando como referencia su ID
 const deleteProduct = async (req, res, next) => {
     try {
         const { id } = req.params;

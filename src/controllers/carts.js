@@ -1,6 +1,9 @@
 const { CartAPI,  } = require('../api');
 const { ApiError, ErrorStatus } = require('../api/errors');
 
+//Controladores para las rutas vinculadas al carrito (se utiliza la CartAPI)
+
+//Traer un carrito según el usuario logueado
 const getCart = async (req, res, next) => {
     try {
         const { user } = req;
@@ -14,6 +17,7 @@ const getCart = async (req, res, next) => {
     };
 };
 
+//Agregar un producto tomando como datos el ID del producto y la cantidad a comprar
 const addProduct = async (req, res, next) => {
     try {
         const { user } = req;
@@ -35,6 +39,7 @@ const addProduct = async (req, res, next) => {
     };
 };
 
+//Eliminar productos teniendo en cuenta el ID del producto y la cantidad a eliminar
 const deleteProduct = async (req, res, next) => {
     try {
         const { user } = req;
@@ -56,6 +61,7 @@ const deleteProduct = async (req, res, next) => {
     };
 };
 
+//Generar una orden de compra con envío de mail de aviso incluído
 const createOrder = async (req, res, next) => {
     try {
         const { user } = req;

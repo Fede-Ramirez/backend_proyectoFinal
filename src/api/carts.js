@@ -3,16 +3,21 @@ const NotificationService  = require('../services/notifications');
 const ProductsAPI = require('./products');
 const { ApiError, ErrorStatus } = require('./errors');
 
+//API para carritos, comunicación con la DB
+
+//Creación de un carrito a partir del registro de un nuevo usuario
 const create = async(userId) => {
     const cart = await CartModel.create({ userId });
     return cart;
 };
 
+//Trae el carrito del usuario que haya iniciado sesión.
 const getCartByUser = async(userId) => {
     const cart = await CartModel.findOne({ userId });
     return cart;
 };
 
+//Agregar productos al carrito utilizando la API de productos
 const addProduct = async (cartId, productId, items) => {
     const product = await ProductsAPI.find(productId);
 
@@ -51,6 +56,7 @@ const addProduct = async (cartId, productId, items) => {
     return cart;
 };
 
+//Eliminar productos del carrito utilizando la API de productos
 const deleteProducts = async (cartId, productId, items) => {
     const product = await ProductsAPI.find(productId);
 
@@ -85,6 +91,7 @@ const deleteProducts = async (cartId, productId, items) => {
     return cart;
 };
 
+//Vaciar el carrito
 const emptyCart = async (cartId) => {
     const cart = await CartModel.findById(cartId);
 
@@ -98,6 +105,7 @@ const emptyCart = async (cartId) => {
     return cart;
 };
 
+//Generación de orden de compra mediante notificación de email
 const createOrder = async (cartId) => {
     const cart = await CartModel.findById(cartId);
 

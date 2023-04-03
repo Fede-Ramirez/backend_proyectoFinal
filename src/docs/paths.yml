@@ -148,12 +148,18 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schema/Categories/Category'
-        401:
+        400:
           description: Parámetros inválidos
           content:
             application/json:
               schema: 
                 $ref: '#/components/schema/Categories/invalidCategoryParameters'
+        401:
+          description: Solo administradores tienen permiso de realizar esta solicitud
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Users/adminOnly'
         500:
           description: Internal Server Error
           content:
@@ -221,6 +227,12 @@ paths:
               application/json:
                 schema:
                   $ref: '#/components/schema/Categories/invalidCategoryParameters'
+          401:
+            description: Solo administradores tienen permiso de realizar esta solicitud
+            content:
+              application/json:
+                schema: 
+                  $ref: '#/components/schema/Users/adminOnly'
           500:
             description: Internal Server Error
             content:
@@ -245,12 +257,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/Categories/deleteCategoryById'
-        401:
+        400:
           description: Prohibición de eliminar una categoría con productos dentro
           content:
             application/json:
               schema:
                 $ref: '#/components/schema/Categories/deleteCategoryProhibition'
+        401:
+          description: Solo administradores tienen permiso de realizar esta solicitud
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Users/adminOnly'
         404:
           description: No se encuentra la categoría con el ID ingresado
           content:
@@ -304,6 +322,12 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schema/Products/invalidProductParameters'
+        401:
+          description: Solo administradores tienen permiso de realizar esta solicitud
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Users/adminOnly'
         500:
           description: Internal Server Error
           content:
@@ -402,6 +426,12 @@ paths:
               application/json:
                 schema:
                   $ref: '#/components/schema/Products/invalidProductParameters'
+          401:
+            description: Solo administradores tienen permiso de realizar esta solicitud
+            content:
+              application/json:
+                schema: 
+                  $ref: '#/components/schema/Users/adminOnly'
           500:
             description: Internal Server Error
             content:
@@ -426,6 +456,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/Products/deleteProductById'
+        401:
+          description: Solo administradores tienen permiso de realizar esta solicitud
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schema/Users/adminOnly'
         404:
           description: No se encuentra el producto con el ID ingresado
           content:
